@@ -32,11 +32,16 @@ mongoose.connection.on("disconnected", () => {
   console.log("[MG-onDisconnected]: Disconnected from MongoDB");
 });
 
+// middlewares. NOTES: order matters
+// extra
+app.use((req, res, next) => {
+  console.log("Hi from  middlewares");
+  next(); // NOTES: go to next middleware
+});
 // NOTES: by default, you cannot send json to express server,
 // so you need this line
 app.use(express.json());
-
-// middlewares
+// routes
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/hotels", hotelRoute);
