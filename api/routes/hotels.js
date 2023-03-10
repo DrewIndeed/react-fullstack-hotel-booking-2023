@@ -52,6 +52,13 @@ router.get("/:id", async (req, res) => {
 });
 // GET ALL
 router.get("/", async (req, res, next) => {
+  // fake err config
+  const failed = true;
+  const err = new Error();
+  err.status = 404;
+  err.message = "Record Not Found!";
+  if (failed) return next(failed);
+
   try {
     const allHotels = await Hotel.findById("asdjfkhasdasdfasdfasdfasdfkjf");
     res.status(200).json(allHotels);

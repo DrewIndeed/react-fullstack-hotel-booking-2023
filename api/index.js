@@ -43,7 +43,14 @@ app.use("/api/v1/hotels", hotelRoute);
 app.use("/api/v1/rooms", roomRoute);
 // error handling
 app.use((err, req, res, next) => {
-  return res.status(500).json("Errors detected from middleware!");
+  const errStatus = err.status || 500;
+  const errMsg = err.message || "Oops! Soemthing went wrong on the server!";
+  return res.status(errStatus).json({
+    success: false,
+    status: errStatus,
+    message: errMsg,
+    stack: err.stack,
+  });
 });
 
 app.listen(8800, () => {
