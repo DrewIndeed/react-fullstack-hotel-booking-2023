@@ -51,13 +51,13 @@ router.get("/:id", async (req, res) => {
   }
 });
 // GET ALL
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
-    const allHotels = await Hotel.find();
+    const allHotels = await Hotel.findById("asdjfkhasdasdfasdfasdfasdfkjf");
     res.status(200).json(allHotels);
   } catch (error) {
     console.log(error); // DEV
-    res.status(500).json(error);
+    next(error);
   }
 });
 
