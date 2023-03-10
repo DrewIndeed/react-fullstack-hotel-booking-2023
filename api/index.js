@@ -2,6 +2,12 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 
+// routes
+import authRoute from "./routes/auth.js";
+import userRoute from "./routes/users.js";
+import hotelRoute from "./routes/hotels.js";
+import roomRoute from "./routes/rooms.js";
+
 // config express BE and load env file to process.env
 const app = express();
 dotenv.config();
@@ -9,6 +15,8 @@ dotenv.config();
 // method to connect to Mongo DB
 const connectDB = async () => {
   try {
+    // NOTES: to suppress strictQuery warning from mongoose
+    await mongoose.set("strictQuery", true);
     await mongoose.connect(process.env.MONGO);
     console.log("Connected to MongoDB");
   } catch (error) {
@@ -23,6 +31,16 @@ mongoose.connection.on("connected", () => {
 mongoose.connection.on("disconnected", () => {
   console.log("[MG-onDisconnected]: Disconnected from MongoDB");
 });
+
+// NOTES: by default, you cannot send json to express server,
+// so you need this line
+app.use(express.json());
+
+// middlewares
+app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/users", userRoute);
+app.use("/api/v1/hotels", hotelRoute);
+app.use("/api/v1/rooms", roomRoute);
 
 app.listen(8800, () => {
   connectDB();
