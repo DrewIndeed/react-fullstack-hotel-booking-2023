@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
 // routes
 import authRoute from "./routes/auth.js";
@@ -22,7 +23,7 @@ const connectDB = async () => {
   } catch (error) {
     throw error;
   }
-};
+}; 
 
 // mongoose listerners
 mongoose.connection.on("connected", () => {
@@ -36,6 +37,7 @@ mongoose.connection.on("disconnected", () => {
 // NOTES: by default, you cannot send json to express server,
 // so you need this line
 app.use(express.json());
+app.use(cookieParser());
 // routes
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", userRoute);
@@ -49,7 +51,7 @@ app.use((err, req, res, next) => {
     success: false,
     status: errStatus,
     message: errMsg,
-    stack: err.stack,
+    // stack: err.stack, // to show error stack
   });
 });
 
