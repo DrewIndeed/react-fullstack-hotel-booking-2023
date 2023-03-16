@@ -38,7 +38,7 @@ export const login = async (req, res, next) => {
     // 2. set the jwt token to cookies
     const jwtToken = jwt.sign(
       { is: user._id, isAdmin: user.isAdmin },
-      process.env.JWT // JWT secret key
+      process.env.JWT // NOTES: JWT secret key, created using "openssl rand -base64 32"
     );
 
     // break down succes response to hide password, isAdmin
@@ -78,7 +78,7 @@ export const deleteUser = async (req, res, next) => {
   }
 };
 
-export const getUser = async (req, res, next) =>  {
+export const getUser = async (req, res, next) => {
   try {
     const recordUser = await User.findById(req.params.id);
     res.status(200).json(recordUser);
