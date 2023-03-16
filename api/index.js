@@ -46,7 +46,7 @@ app.use("/api/v1/rooms", roomRoute);
 // error handling
 app.use((err, req, res, next) => {
   const errStatus = err.status || 500;
-  const errMsg = err.message || "Oops! Soemthing went wrong on the server!";
+  const errMsg = err.message || "Oops! Something went wrong on the server!";
   return res.status(errStatus).json({
     success: false,
     status: errStatus,
