@@ -33,7 +33,7 @@ const FeaturedProperties = () => {
       </div>
       <div className="fpItem">
         <img
-          src="https://cf.bstatic.com/xdata/images/hotel/max1280x900/232902339.jpg?k=3947def526b8af0429568b44f9716e79667d640842c48de5e66fd2a8b776accd&o=&hp=1"
+          src="https://imgs.search.brave.com/usq4lU5sTlk3CeZIV3CRqqlNdv6H8rEYBhR4YkE48RM/rs:fit:1024:682:1/g:ce/aHR0cHM6Ly93d3cu/MWxpZXUxc2FsbGUu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDE4LzA4L2ZvdXIt/c2Vhc29ucy1yaXR6/LWxpc2Jvbi0xbGll/dTFzYWxsZS1yZXVu/aW9ucy0xMDI0eDY4/Mi5qcGc"
           alt=""
           className="fpImg"
         />

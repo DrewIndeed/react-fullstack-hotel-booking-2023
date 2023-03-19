@@ -56,3 +56,19 @@ export const getHotels = async (req, res, next) => {
     next(error);
   }
 };
+
+export const countByCity = async (req, res, next) => {
+  const cities = req.query.cities.split(",").map((cityStr) => cityStr.trim());
+  try {
+    const citiesList = await Promise.all(
+      cities.map((targetCity) => {
+        // return Hotel.find({ city: targetCity }).length; // 1st way
+        return Hotel.countDocuments({ city: targetCity }); // 2nd way: MongoDB countDocuments
+      })
+    );
+    res.status(200).json(citiesList);
+  } catch (error) {
+    console.log(error); // DEV
+    next(error);
+  }
+};

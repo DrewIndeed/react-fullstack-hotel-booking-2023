@@ -7,23 +7,23 @@ import {
   getUser,
   getUsers,
 } from "../controllers/auth.js";
-import { verifyUser, verifyAdmin } from "../utils/auth.js";
+import { verifyUser, verifyAdmin, verifyToken } from "../utils/auth.js";
 
 const router = express.Router();
 
-// TEST: middlewares to authorize
-// // CHECK VALID LOGIN
-// router.get("/check-authen", verifyToken, (req, res, next) => {
-//   res.send("You are authenticated! Welcome back!");
-// });
-// // CHECK VALID USER
-// router.get("/check-author/:id", verifyUser, (req, res, next) => {
-//   res.send("Hi pale! You can adjust YOUR account info.");
-// });
-// // CHECK VALID ADMIN
-// router.get("/check-admin/:id", verifyAdmin, (req, res, next) => {
-//   res.send("Hi admin! You can adjust ALL accounts info.");
-// });
+// DEV: middlewares to authorize
+// CHECK VALID LOGIN
+router.get("/check-authen", verifyToken, (req, res, next) => {
+  res.send("You are authenticated! Welcome back!");
+});
+// CHECK VALID USER
+router.get("/check-author/:id", verifyUser, (req, res, next) => {
+  res.send("Hi pale! You can adjust YOUR account info.");
+});
+// CHECK VALID ADMIN
+router.get("/check-admin/:id", verifyAdmin, (req, res, next) => {
+  res.send("Hi admin! You can adjust ALL accounts info.");
+});
 
 // CREATE
 router.post("/register", verifyUser, register);
