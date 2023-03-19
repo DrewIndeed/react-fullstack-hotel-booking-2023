@@ -10,7 +10,7 @@ const Featured = () => {
     <div className="featured">
       {loading && <p>Loading ...</p>}
       {!loading && error && <p>Opps! Something is wrong ...</p>}
-      {!loading && !error && (
+      {!loading && !error && data && (
         <>
           <div className="featuredItem">
             <img
